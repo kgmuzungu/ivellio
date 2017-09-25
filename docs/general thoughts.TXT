@@ -1,0 +1,98 @@
+****************************
+**    Zeitplan
+****************************
+
+
+****************************
+**    login HK
+****************************
+IP aendert sich
+http port 8081
+ssh port 8082
+
+
+****************************
+**    recommendations
+****************************
+ganze Webseite auf HTTPS umstellen, i.e. ein certificate installieren
+
+DB man kann Datensaetze einfach loeschen und hinzufuegen
+Inkludiert: in AuswahlInkl muss die richtige idAuswahl eingetragen werden
+	Vorsicht wenn man Datensaetze loescht
+Man kann den User zwingen gewisse Felder auszufuellen
+
+
+
+
+****************************
+**    Kosten
+****************************
+
+
+****************************
+**    Fragen
+****************************
+? Was soll am Ende rauskommen? Ergebnis wird ein Kostenvoranschlag/Mietvertragvorschalg errechnet den der Kunde gleich sieht oder werden die ausgewaehlten Punkte in einem Email an Sie versickt erstmal (sprich der Kunde muss auch ein paar Kontaktdaten uerber sich eingeben) und der Kunde sieht eine Zussamenfassung seiner Auswahl
+
+muss etwas in die Datanbank geschrieben werden? Oder bloss lesen?
+
+Bei "Auswahl" gibt es immer auch "diese Loesung wird nicht benoetigt", oder so aehnlich?
+
+D.h. die Seite soll alle Loesung auflisten
+
+Euer WebServer ist Apache, LAMP stack auf Ubuntu, richtig?
+
+****************************
+**    Fragen
+****************************
+Web server	Apache/2.4.7 (Ubuntu) with MySQL
+
+ERP duerfte aber auf MS SQL laufen
+
+****************************
+**    Install
+****************************
+LAMP
+phpMyAdmin for MySQL
+MySQL Workbench
+geany
+filezilla
+
+
+Sublime
+WinSCP
+
+
+
+****************************
+**    PHP Seiten / form
+****************************
+http://brian.dobberteen.com/code/using-php-and-mysql-to-create-a-simple-contact-form-and-results-browser/
+http://phpdatabaseform.com/examples/
+
+
+****************************
+**    setup WinSCP
+****************************
+Im running Ubuntu 17.04. When you make a new session select SCP protocol and click on advanced settings. Then select SCP/Shell and write: /bin/bash -c "sudo -s"
+
+on the server I have openssh installed 
+
+I have my user, e.g.: webdev added to the sudo group
+And I had to add to /etc/sudoers the line: webdev ALL = NOPASSWD : ALL
+
+
+
+****************************
+**    nicht vergessen
+****************************
+DB Name aendern
+
+text data type in DB... BLOB
+
+
+DB in- ex- clusions beruecksichtigen
+	ich hab ein kleines rotes Rufzeichen hingemacht
+	fuer mehrere inclusions braucht man aber einen extra table
+	
+

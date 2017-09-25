@@ -1,0 +1,11 @@
+Hallo Herr Ivellio-Vellin, 
+
+nein keine 450EURx14Tage :) Ich bin jetzt gar nicht richtig infromiert ab wieviel ich zusaetzliche Einkuenfte versteuern und bei der Sozialversicherung melden muss. Ein Gewerbe anmelden passt mir gerade nicht so. Was ich aber weiss ist, dass ich 700EUR pro Jahr ohne etwas zu melden dazuverdienen kann. Alternative waere auch hardware, denn ich braeuchte einen neuen Laptop. 
+
+So wie wir bis jetzt spezifiziert haben sollten wir mit bis zu 1400EUR auskommen (unter Umstaenden 700EUR heuer und 700EUR naechstes Jahr, oder hardware), wenn Sie damit einverstanden sind. Ich schreibe meine reine Arbeitszeit mit damit alles transparent bleibt (excl. Testumgebung bei mir aufsetzen und ein bisschen nachlernen etc... ich mache das gerade weil es mir Spass macht und interessiert). Dann wuerde ich bis Sie von Ihrem Urlaub zurueck sind Projekt 1-3 zu loesen ohne layout (ohne style sheets), unverbindlich erstmal weil mich das gerade interessiert. Sie sehen sich das an und wir reden von da weiter. 
+
+Ich habe eigentlich auch schon begonnen. Und ich haette eine weitere Frage. Koennten Sie mir ein Beispiel vorrechnen? D.h. ein Kunde waehlt ein paar Loesungen aus und wie wird der Endpreis berechnet aus Preis und Installationsanteil plus Mehrwertsteuer, was sonst noch? Weil wenn wir noch mehr Multiplikationsfaktoren/Preise in der Datenbank brauchen, dann ist es viel leichter diese jetzt schon zu beruecksichtigen als spaeter nacharbeiten. 
+
+Sagen Sie mir Bescheid was sie meinen. Sie koenenn mich gerne einfach mit Du und Klaus ansprechen. 
+Beste Gruesse, 
+Klaus
