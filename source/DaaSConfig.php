@@ -26,28 +26,40 @@
 <div class="container">
 <div class="card-deck">
   <div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h4 class="card-title" id="card1arbeitsplatz"></h4>
     </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" id="card1anwendung">Cras justo odio</li>
+      <li class="list-group-item" id="card1geeignet">Dapibus ac facilisis in</li>
+      <li class="list-group-item" id="card1device">Vestibulum at eros</li>
+      <li class="list-group-item" id="card1image">image</li>
+      <li class="list-group-item" id="card1preis">Vestibulum at eros</li>
+    </ul>
   </div>
   <div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h4 class="card-title" id="card2arbeitsplatz"></h4>
     </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" id="card2anwendung">Cras justo odio</li>
+      <li class="list-group-item" id="card2geeignet">Dapibus ac facilisis in</li>
+      <li class="list-group-item" id="card2device">Vestibulum at eros</li>
+      <li class="list-group-item" id="card2image">image</li>
+      <li class="list-group-item" id="card2preis">Vestibulum at eros</li>
+    </ul>
   </div>
   <div class="card">
-    <img class="card-img-top" src="..." alt="Card image cap">
     <div class="card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h4 class="card-title" id="card3arbeitsplatz"></h4>
     </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" id="card3anwendung">Cras justo odio</li>
+      <li class="list-group-item" id="card3geeignet">Dapibus ac facilisis in</li>
+      <li class="list-group-item" id="card3device">Vestibulum at eros</li>
+      <li class="list-group-item" id="card3image">image</li>
+      <li class="list-group-item" id="card3preis">Vestibulum at eros</li>
+    </ul>
   </div>
 </div>
 </div>
@@ -77,11 +89,11 @@
 				//key is the loop index = for result this is the index of the array = next object
 				//and value is the object in the array at position key 
 	        	$.each( result, function( key, value ) { 
-	        		$("#col"+(key+2)+"row1").html(value['dev_arbeitsplatz']);
-		        	$("#col"+(key+2)+"row2").html(value['dev_anwendung']);
-		        	$("#col"+(key+2)+"row3").html(value['dev_geeignet']);
-		        	$("#col"+(key+2)+"row4").html(value['dev_device']);
-		        	$("#col"+(key+2)+"row6").html(value['dev_preis']);
+	        		$("#card"+(key+1)+"arbeitsplatz").html(value['dev_arbeitsplatz']);
+		        	$("#card"+(key+1)+"anwendung").html(value['dev_anwendung']);
+		        	$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
+		        	$("#card"+(key+1)+"device").html(value['dev_device']);
+		        	$("#card"+(key+1)+"preis").html(value['dev_preis']);
         				//string += '<tr> <td> '+key+' ' + JSON.stringify(value) + '</td> </tr>';
             			//string += '<tr> <td> key'+ key+ ' ' + value['iddevices'] + '</td> <td> '+ value['dev_arbeitsplatz']+'</td> </tr>';
 	            		//string += '<tr> <td>' + value['iddevices'] + '</td> <td> '+ value['dev_arbeitsplatz']+'</td> </tr>';
