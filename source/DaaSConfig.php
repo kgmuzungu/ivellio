@@ -22,27 +22,27 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
+        <div class="col-md-3"><p id="col2row1"></p></div>
+        <div class="col-md-3"><p id="col3row1"></p></div>
+        <div class="col-md-3"><p id="col4row1"></p></div>
     </div>
     <div class="row">
-        <div class="col-md-3"><p> Typische Anwendung </p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
+        <div class="col-md-3"><p id="col1row2"> Typische Anwendung </p></div>
+        <div class="col-md-3"><p id="col2row2"></p></div>
+        <div class="col-md-3"><p id="col3row2"></p></div>
+        <div class="col-md-3"><p id="col4row2"></p></div>
     </div>
     <div class="row">
-        <div class="col-md-3"><p> Geeignet fuer </p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
+        <div class="col-md-3"><p id="col1row3"> Geeignet fuer </p></div>
+        <div class="col-md-3"><p id="col2row3"></p></div>
+        <div class="col-md-3"><p id="col3row3"></p></div>
+        <div class="col-md-3"><p id="col4row3"></p></div>
     </div>
     <div class="row">
-        <div class="col-md-3"><p> Device </p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
+        <div class="col-md-3"><p id="col1row4"> Device </p></div>
+        <div class="col-md-3"><p id="col2row4"></p></div>
+        <div class="col-md-3"><p id="col3row4"></p></div>
+        <div class="col-md-3"><p id="col4row4"></p></div>
     </div>
     <div class="row">
         <div class="col-md-3"></div>
@@ -51,10 +51,10 @@
         <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-3"><p> Mietpreis pro Monat </p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
-        <div class="col-md-3"><p></p></div>
+        <div class="col-md-3"><p id="col1row6"> Mietpreis pro Monat </p></div>
+        <div class="col-md-3"><p id="col2row6"></p></div>
+        <div class="col-md-3"><p id="col3row6"></p></div>
+        <div class="col-md-3"><p id="col4row6"></p></div>
     </div>
 </div>
 
@@ -82,14 +82,20 @@
 				
 				//key is the loop index = for result this is the index of the array = next object
 				//and value is the object in the array at position key 
-	        	$.each( result, function( key, value ) { 
-
+	        	$.each( result, function( key, value ) {
+		        	//var colrow = "col"+(key+2)+"row1"; 
+		        	//var colrow = "#col"+(key+2)+"row1"; 
+		        	$("#col"+(key+2)+"row1").html(value['dev_arbeitsplatz']);
+		        	$("#col"+(key+2)+"row2").html(value['dev_anwendung']);
+		        	$("#col"+(key+2)+"row3").html(value['dev_geeignet']);
+		        	$("#col"+(key+2)+"row4").html(value['dev_device']);
+		        	$("#col"+(key+2)+"row6").html(value['dev_preis']);
         				//string += '<tr> <td> '+key+' ' + JSON.stringify(value) + '</td> </tr>';
             			//string += '<tr> <td> key'+ key+ ' ' + value['iddevices'] + '</td> <td> '+ value['dev_arbeitsplatz']+'</td> </tr>';
 	            		//string += '<tr> <td>' + value['iddevices'] + '</td> <td> '+ value['dev_arbeitsplatz']+'</td> </tr>';
-	            	}); 
-	             	string += '</table>'; 
-	             	$("div.container").html(string); 
+	            }); 
+	            //string += '</table>'; 
+	            //$("div.container").html(string); 
 	       }); //end of done function
 		        	
 		}); //end of ready function
