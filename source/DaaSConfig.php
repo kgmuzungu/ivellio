@@ -7,6 +7,7 @@
  <head>
   <title>Device as a Service</title>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="DaaS.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,6 +16,7 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> -->
   <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script> -->
   <style>
+  
   </style>
  </head>
  <body>
@@ -22,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-3"><p id="col2row1"></p></div>
+        <div class="col-md-3 enjoy-css"><p id="col2row1"></p></div>
         <div class="col-md-3"><p id="col3row1"></p></div>
         <div class="col-md-3"><p id="col4row1"></p></div>
     </div>
