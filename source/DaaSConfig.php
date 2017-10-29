@@ -7,7 +7,7 @@
  <head>
   <title>Device as a Service</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="DaaS.css">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,6 +15,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> -->
   <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script> -->
+  <link rel="stylesheet" href="DaaS.css">
   <style>
   
   </style>
@@ -24,39 +25,39 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-3 enjoy-css"><p id="col2row1"></p></div>
-        <div class="col-md-3"><p id="col3row1"></p></div>
-        <div class="col-md-3"><p id="col4row1"></p></div>
+        <div class="col-md-3"><div class="yw-title"><p id="col2row1"></p></div></div>
+        <div class="col-md-3"><div class="gr-title"><p id="col3row1"></p></div></div>
+        <div class="col-md-3"><div class="bl-title"><p id="col4row1"></p></div></div>
     </div>
     <div class="row">
         <div class="col-md-3"><p id="col1row2"> Typische Anwendung </p></div>
-        <div class="col-md-3"><p id="col2row2"></p></div>
-        <div class="col-md-3"><p id="col3row2"></p></div>
-        <div class="col-md-3"><p id="col4row2"></p></div>
+        <div class="col-md-3"><div class="yw-border"><p id="col2row2"></p></div></div>
+        <div class="col-md-3"><div class="gr-border"><p id="col3row2"></p></div></div>
+        <div class="col-md-3"><div class="bl-border"><p id="col4row2"></p></div></div>
     </div>
     <div class="row">
         <div class="col-md-3"><p id="col1row3"> Geeignet fuer </p></div>
-        <div class="col-md-3"><p id="col2row3"></p></div>
-        <div class="col-md-3"><p id="col3row3"></p></div>
-        <div class="col-md-3"><p id="col4row3"></p></div>
+        <div class="col-md-3"><div class="yw-border"><p id="col2row3"></p></div></div>
+        <div class="col-md-3"><div class="gr-border"><p id="col3row3"></p></div></div>
+        <div class="col-md-3"><div class="bl-border"><p id="col4row3"></p></div></div>
     </div>
     <div class="row">
         <div class="col-md-3"><p id="col1row4"> Device </p></div>
-        <div class="col-md-3"><p id="col2row4"></p></div>
-        <div class="col-md-3"><p id="col3row4"></p></div>
-        <div class="col-md-3"><p id="col4row4"></p></div>
+        <div class="col-md-3"><div class="yw-border"><p id="col2row4"></p></div></div>
+        <div class="col-md-3"><div class="gr-border"><p id="col3row4"></p></div></div>
+        <div class="col-md-3"><div class="bl-border"><p id="col4row4"></p></div></div>
     </div>
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
-        <div class="col-md-3"></div>
+        <div class="col-md-3"><div class="yw-border"></div></div>
+        <div class="col-md-3"><div class="gr-border"></div></div>
+        <div class="col-md-3"><div class="bl-border"></div></div>
     </div>
     <div class="row">
         <div class="col-md-3"><p id="col1row6"> Mietpreis pro Monat </p></div>
-        <div class="col-md-3"><p id="col2row6"></p></div>
-        <div class="col-md-3"><p id="col3row6"></p></div>
-        <div class="col-md-3"><p id="col4row6"></p></div>
+        <div class="col-md-3"><div class="yw-border"><p id="col2row6"></p></div></div>
+        <div class="col-md-3"><div class="gr-border"><p id="col3row6"></p></div></div>
+        <div class="col-md-3"><div class="bl-border"><p id="col4row6"></p></div></div>
     </div>
 </div>
 
