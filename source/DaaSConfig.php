@@ -15,9 +15,12 @@
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> -->
   <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script> -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script> -->
   
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
   <style>
   </style>
  </head>
@@ -35,6 +38,19 @@
       <li class="list-group-item" id="card1device">Vestibulum at eros</li>
       <li class="list-group-item" id="card1image">image</li>
       <li class="list-group-item" id="card1preis">Vestibulum at eros</li>
+      <li class="list-group-item" id="card1config">
+      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    		Zubehoer und Software
+  		</a>
+  		<div class="collapse" id="collapseExample">
+  			<div class="card">
+  			<ul class="list-group list-group-flush">
+      			<li class="list-group-item" id="">etc2</li>
+      			<li class="list-group-item" id="">etc3</li>
+      		</ul>
+      		</div>
+		</div>
+	  </li>
     </ul>
   </div>
   <div class="card">
@@ -47,6 +63,11 @@
       <li class="list-group-item" id="card2device">Vestibulum at eros</li>
       <li class="list-group-item" id="card2image">image</li>
       <li class="list-group-item" id="card2preis">Vestibulum at eros</li>
+      <li class="list-group-item" id="card1config"> Zubehoer und Software
+  		
+  		
+		
+	  </li>
     </ul>
   </div>
   <div class="card">
@@ -59,9 +80,15 @@
       <li class="list-group-item" id="card3device">Vestibulum at eros</li>
       <li class="list-group-item" id="card3image">image</li>
       <li class="list-group-item" id="card3preis">Vestibulum at eros</li>
+      <li class="list-group-item" id="card3config">
+      	<ul class="list-group list-group-flush">
+      		<li class="list-group-item" id="">etc2</li>
+      		<li class="list-group-item" id="">etc3</li>
+      	</ul>
+      </li>
     </ul>
   </div>
-</div>
+ </div>
 </div>
 
 
@@ -79,11 +106,8 @@
 	        .done(function( data ) { 
 	        	//console.dir(data);      // print to consol for debug
 	        	var result = JSON.parse(data); //result form php-service is array
-	 
-	       		/* test test   output data on page */
-	      		//var string = '<table> <tr> <th>#</th> <th>Loesung</th> <tr>';
-	      		
-				//result is an array of objects
+
+	        	//result is an array of objects
 				//console.dir('\n output ' + result[1].dev_arbeitsplatz);
 				
 				//key is the loop index = for result this is the index of the array = next object
@@ -94,17 +118,9 @@
 		        	$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
 		        	$("#card"+(key+1)+"device").html(value['dev_device']);
 		        	$("#card"+(key+1)+"preis").html(value['dev_preis']);
-        				//string += '<tr> <td> '+key+' ' + JSON.stringify(value) + '</td> </tr>';
-            			//string += '<tr> <td> key'+ key+ ' ' + value['iddevices'] + '</td> <td> '+ value['dev_arbeitsplatz']+'</td> </tr>';
-	            		//string += '<tr> <td>' + value['iddevices'] + '</td> <td> '+ value['dev_arbeitsplatz']+'</td> </tr>';
 	            }); 
-	             	//string += '</table>'; 
-	             	//$("div.container").html(string); 
 	       }); //end of done function
-		        	
 		}); //end of ready function
-		
-
 	 </script>
 
  </body>
