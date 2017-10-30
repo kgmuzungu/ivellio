@@ -39,15 +39,12 @@
       <li class="list-group-item" id="card1image">image</li>
       <li class="list-group-item" id="card1preis">Vestibulum at eros</li>
       <li class="list-group-item" id="card1config">
-      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
     		Zubehoer und Software
   		</a>
-  		<div class="collapse" id="collapseExample">
+  		<div class="collapse" id="collapseExample1">
   			<div class="card">
-  			<ul class="list-group list-group-flush">
-      			<li class="list-group-item" id="">etc2</li>
-      			<li class="list-group-item" id="">etc3</li>
-      		</ul>
+  			<ul class="list-group list-group-flush" id="conf1"></ul>
       		</div>
 		</div>
 	  </li>
@@ -63,11 +60,16 @@
       <li class="list-group-item" id="card2device">Vestibulum at eros</li>
       <li class="list-group-item" id="card2image">image</li>
       <li class="list-group-item" id="card2preis">Vestibulum at eros</li>
-      <li class="list-group-item" id="card1config"> Zubehoer und Software
-  		
-  		
-		
-	  </li>
+      <li class="list-group-item" id="card1config">
+      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+    		Zubehoer und Software
+  		</a>
+  		<div class="collapse" id="collapseExample2">
+  			<div class="card">
+  			<ul class="list-group list-group-flush" id="conf2"></ul>
+      		</div>
+		</div>
+	  </li>      
     </ul>
   </div>
   <div class="card">
@@ -80,15 +82,38 @@
       <li class="list-group-item" id="card3device">Vestibulum at eros</li>
       <li class="list-group-item" id="card3image">image</li>
       <li class="list-group-item" id="card3preis">Vestibulum at eros</li>
-      <li class="list-group-item" id="card3config">
-      	<ul class="list-group list-group-flush">
-      		<li class="list-group-item" id="">etc2</li>
-      		<li class="list-group-item" id="">etc3</li>
-      	</ul>
-      </li>
+      <li class="list-group-item" id="card1config">
+      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+    		Zubehoer und Software
+  		</a>
+  		<div class="collapse" id="collapseExample3">
+  			<div class="card">
+  			<ul class="list-group list-group-flush" id="conf3"></ul>
+      		</div>
+		</div>
+	  </li>
     </ul>
-  </div>
- </div>
+  </div> 
+ </div> <!-- end card deck -->
+ 
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title" id="endpreis"> Endpreis (exkl. MWSt): </h4>
+    </div>
+  </div>  
+ 
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title" id="angebot"> Individuelles Angebot anfordern </h4>
+    </div>
+  </div>   
+
+  <div class="card">
+    <div class="card-block">
+      <h4 class="card-title" id="pdfspeichern"> Als PDF speichern </h4>
+    </div>
+  </div>   
+ 
 </div>
 
 
@@ -99,6 +124,7 @@
 	 <script>
 	 	//the following is using jQuery
 	 	$(document).ready(function(){ //as soon as the DOM is ready, execute content
+		 	var deviceCount=0;
 	 		$.ajax({ 
 	          	method: "POST", 
 	          	url: "DaaSConfig_getDevices.php", 
@@ -117,9 +143,31 @@
 		        	$("#card"+(key+1)+"anwendung").html(value['dev_anwendung']);
 		        	$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
 		        	$("#card"+(key+1)+"device").html(value['dev_device']);
-		        	$("#card"+(key+1)+"preis").html(value['dev_preis']);
+		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"> <label class="form-check-label">\n<input type="numerical" class="form-control" name="checkbox" value="1">   ' + value['dev_preis'] + ' EUR p.m.</label><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
+		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"><input type="numerical" class="form-control" name="checkbox" value="0"><span class="input-group-addon" id="basic-addon2">Stk.</span>  ' + value['dev_preis'] + ' EUR p.Stk.p.m.</div>');
+		        	$("#card"+(key+1)+"preis").html('<h5>Preis:  ' + value['dev_preis'] + 'EUR p.Stk.p.m.</h5> <div class="input-group input-group-sm col-lg-5"><input type="numerical" class="form-control" name="checkbox" value="0"><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');		        	
+		        	//$("#card"+(key+1)+"preis").html(value['dev_preis']);
+		        	deviceCount++;
 	            }); 
 	       }); //end of done function
+	 		$.ajax({ 
+	          	method: "POST", 
+	          	url: "DaaSConfig_getConfig.php", 
+	         })
+	        .done(function( data ) { 
+	        	//console.dir(data);      // print to consol for debug
+	        	var result = JSON.parse(data); //result form php-service is array
+
+				//key is the loop index = for result this is the index of the array = next object
+				//and value is the object in the array at position key 
+	        	$.each( result, function( key, value ) { 
+	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item">' + value['conf_name'] + '</li>');
+	        		$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label">\n<input type="checkbox" class="form-check-input" name="checkbox" value="1">' + value['conf_name'] + ' ' + value['conf_beschreibung'] + '</label></li>');
+	            }); 
+	       }); //end of done function
+
+			
+		       
 		}); //end of ready function
 	 </script>
 
