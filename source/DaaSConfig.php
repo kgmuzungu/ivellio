@@ -153,8 +153,16 @@
 
   <div class="card">
     <div class="card-block">
-      <h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="angebot">Individuelles Angebot anfordern </span></h4>
+      <a class="" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4"><h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="angebot">Individuelles Angebot anfordern </span></h4>
+      </a>
     </div>
+    	<div class="collapse" id="collapseExample4">
+  			<div class="card">
+  				<ul class="list-group list-group-flush" id="emailInput"></ul>
+  				blablabla<br>blablabla<br>blablabla<br>blablabla<br>blablabla<br>
+    		</div>
+		</div>
+    
   </div>   
  
 </div> <!-- end container -->
@@ -247,6 +255,7 @@
 		        	$("#card"+(key+1)+"geeignet").html("<h6>Geeignet f&uuml;r:</h6>"+createListGlyphicon(value['dev_geeignet']));
 		        	//$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
 		        	$("#card"+(key+1)+"device").html("<h5><b>"+value['dev_device']+"</b></h5>"+createListGlyphicon(value['dev_beschreibung']));
+		        	$("#card"+(key+1)+"image").html("<img class='card-img-top' src='"+value['dev_imagepath']+"' alt='"+value['dev_device']+"'>");
 		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"> <label class="form-check-label">\n<input type="numerical" class="form-control" name="checkbox" value="1">   ' + value['dev_preis'] + ' EUR p.m.</label><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
 		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"><input type="numerical" class="form-control" name="checkbox" value="0"><span class="input-group-addon" id="basic-addon2">Stk.</span>  ' + value['dev_preis'] + ' EUR p.Stk.p.m.</div>');
 		        	$("#card"+(key+1)+"preis").html('<div class="row"><div class="col-lg-5 my-auto" style="font-size:1.2rem;"> &aacute; ' + value['dev_preis'] + 'EUR</div> <div class="input-group col-lg-5"><input type="numerical" class="form-control" name="dev_amount'+(key+1)+'" value="0" id="dev_amount"><span class="input-group-addon" id="basic-addon2">Stk.</span></div></div>');
@@ -289,6 +298,14 @@
 	    	//console.log(queryString);
 		});
 
+		/*//this function should scroll to the bottom of the page when the Angebot was clicked
+		$(document).on('click', "#angebot", function(){
+			console.log( "in angebot!" );
+			//window.scrollTo(0, document.body.scrollHeight);
+			//window.scrollTo(0,document.querySelector(".scrollingContainer").scrollHeight);
+			window.scrollTo(0,document.querySelector("#emailInput").scrollHeight);
+		}); */
+
 		// this function does not autmatically adopt to more than 3 devices but can be easily modified
 		//formSerialArray is the serialized form = all inputs that are relevant
 		function calculateFinalPrice (formSerialArray){
@@ -322,7 +339,6 @@
 			});
 		}
 
-		
 			
 	 </script>
 
