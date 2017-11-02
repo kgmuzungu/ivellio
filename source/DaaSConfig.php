@@ -21,7 +21,54 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
   <style>
+  	@font-face {
+    	font-family: GlyphaLT55;
+    	src: url(glypha-lt-55-roman-59f998248fb40.ttf) format("truetype");
+		}
+  	html {
+		font-size: 14px;
+		}
+	body{
+		font-family: "Courier New", Courier, monospace;
+		color:#000;
+	}
+	div.card{background-color:#f9f7f7;}
+	li[id^="card"]{
+		padding-bottom: 0.25rem;
+		padding-top: 0.5rem;
+		background-color:#f9f7f7;
+		}
+	ul#listIcons { list-style:none; }
+	ul#listIcons li { margin-bottom:0px; }
+	li#listIcons:before {    
+    	font-family: 'FontAwesome';
+    	aria-hidden='true';
+    	content: '\f087';
+    	margin:0 5px 0 -15px;
+    	color: #868E96;
+		}
+	#pdfspeichern:before {    
+    	font-family: 'FontAwesome';
+    	aria-hidden='true';
+    	content: '\f1c1';
+    	margin:0 5px 0 -15px;
+    	color: #000;
+		}
+	#angebot:before {    
+    	font-family: 'FontAwesome';
+    	aria-hidden='true';
+    	content: '\f0e0';
+    	margin:0 5px 0 -15px;
+    	color: #000;
+		}
+	.btn{margin-bottom:10px;}
+	.bg-primary{background-color:#3e9bff;}
+	.bg-success{background-color:#3bd75e;}
+  
   </style>
  </head>
  <body>
@@ -30,18 +77,16 @@
 <form id="main_form">
 <div class="card-deck">
   <div class="card">
-    <div class="card-block">
-      <h4 class="card-title" id="card1arbeitsplatz"></h4>
-    </div>
+  	 <div class="card-header" style="background-color:#3e9bff;"><h5 style="font-weight:bold;" id="card1arbeitsplatz"></h4></div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" id="card1anwendung">Cras justo odio</li>
+      <li class="list-group-item " id="card1anwendung">Cras justo odio</li>
       <li class="list-group-item" id="card1geeignet">Dapibus ac facilisis in</li>
       <li class="list-group-item" id="card1device">Vestibulum at eros</li>
       <li class="list-group-item" id="card1image">image</li>
       <li class="list-group-item" id="card1preis">Vestibulum at eros</li>
       <li class="list-group-item" id="card1config">
-      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-    		Zubehoer und Software
+      	<a class="btn btn-outline-primary" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+    		<b>Zubehoer und Software</b>
   		</a>
   		<div class="collapse" id="collapseExample1">
   			<div class="card">
@@ -52,9 +97,7 @@
     </ul>
   </div>
   <div class="card">
-    <div class="card-block">
-      <h4 class="card-title" id="card2arbeitsplatz"></h4>
-    </div>
+  	 <div class="card-header" style="background-color:#3bd75e;"><h5 style="font-weight:bold;" id="card2arbeitsplatz"></h4></div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item" id="card2anwendung">Cras justo odio</li>
       <li class="list-group-item" id="card2geeignet">Dapibus ac facilisis in</li>
@@ -62,8 +105,8 @@
       <li class="list-group-item" id="card2image">image</li>
       <li class="list-group-item" id="card2preis">Vestibulum at eros</li>
       <li class="list-group-item" id="card1config">
-      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-    		Zubehoer und Software
+      	<a class="btn btn-outline-success" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+    		<b>Zubehoer und Software</b>
   		</a>
   		<div class="collapse" id="collapseExample2">
   			<div class="card">
@@ -74,9 +117,7 @@
     </ul>
   </div>
   <div class="card">
-    <div class="card-block">
-      <h4 class="card-title" id="card3arbeitsplatz"></h4>
-    </div>
+  	 <div class="card-header bg-warning"><h5 style="font-weight:bold;" id="card3arbeitsplatz"></h4></div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item" id="card3anwendung">Cras justo odio</li>
       <li class="list-group-item" id="card3geeignet">Dapibus ac facilisis in</li>
@@ -84,8 +125,8 @@
       <li class="list-group-item" id="card3image">image</li>
       <li class="list-group-item" id="card3preis">Vestibulum at eros</li>
       <li class="list-group-item" id="card1config">
-      	<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
-    		Zubehoer und Software
+      	<a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+    		<b>Zubehoer und Software</b>
   		</a>
   		<div class="collapse" id="collapseExample3">
   			<div class="card">
@@ -98,21 +139,21 @@
  </div> <!-- end card deck -->
  </form>
  
-  <div class="card">
+  <div class="card text-white" style="border-color:#f35d5d; background-color:#f35d5d;margin-top: 5px;margin-bottom: 5px;">
     <div class="card-block">
-      <h4 class="card-title"> Endpreis (exkl. MWSt): <p id="endpreis"> 0 </p>EUR</h4>
+      <h4 class="card-title my-auto"> <b style="padding-left: 30px;">Endpreis (exkl. MWSt): <span id="endpreis"> 0 </span> EUR p.m.</b></h4>
     </div>
   </div>  
  
   <div class="card">
     <div class="card-block">
-      <h4 class="card-title" id="angebot"> Individuelles Angebot anfordern </h4>
+      <h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="pdfspeichern">Als PDF speichern </span></h4>
     </div>
   </div>   
 
   <div class="card">
     <div class="card-block">
-      <h4 class="card-title" id="pdfspeichern"> Als PDF speichern </h4>
+      <h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="angebot">Individuelles Angebot anfordern </span></h4>
     </div>
   </div>   
  
@@ -127,6 +168,62 @@
 	 	//the following is using jQuery
 	 	var deviceCount=0; //global var
 		var deviceResult=[]; //global for adding up total price use push() to add array element and pop() to remove
+
+		//takes a string, usually from the DB, and after each <br> it will incect a <i class=...>
+		
+		function injectGlyphicon (myString){
+			var end=false;
+			var beginning="";
+			var rest=myString;
+			console.log("in injectGlyphicon");
+			var iStringFirst = "<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>";
+			//var iStringMiddle = "<br>"+iStringFirst;
+			rest = rest.replace(/^/,iStringFirst);
+			while(!end){
+				if (rest.search("<br>")>0){
+					beginning=beginning+rest.substring(0,(rest.indexOf("<br>")+4));
+					rest=rest.substring((rest.indexOf("<br>")+4)); //substring(start,end)
+					rest= rest.replace (/^/,iStringFirst);
+					console.log("in if; beginning " + beginning);
+					console.log("in if; rest "+ rest);
+				} else {
+					end=true;
+				}	 
+			}
+			//myString = myString.replace(/^/,iString); //regexp ... replace beginning with new iString
+			return beginning+rest;
+		}
+
+		function createListGlyphicon(myString){
+			var end=false;
+			var beginning="";
+			var rest=myString;
+			console.log("in createListGlyphicon");
+			//var strIcon = "<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>";
+			var strIcon = "<i class='fa fa-check' style='color:#868E96'></i>";
+			var strUL = "<ul id='listIcons'>";
+			var strULend ="</ul>";
+			var strLI = "<li id='listIcons'>";
+			var strLIend = "</li>";
+			//var iStringMiddle = "<br>"+iStringFirst;
+			rest = rest.replace(/^/,strUL+strLI);
+			/.*\/(.*?)$/
+			while(!end){
+				if (rest.search("<br>")>0){
+					beginning=beginning+rest.substring(0,(rest.indexOf("<br>")));
+					beginning = beginning + strLIend; //close list tag at end of string
+					rest=rest.substring((rest.indexOf("<br>")+4)); //substring(start,end)
+					rest= rest.replace (/^/,strLI);
+					console.log("in if; beginning " + beginning);
+					console.log("in if; rest "+ rest);
+				} else {
+					end=true;
+				}	 
+			}
+			//myString = myString.replace(/^/,iString); //regexp ... replace beginning with new iString
+			return beginning+rest+strULend;
+			}
+		
 	 	$(document).ready(function(){ //as soon as the DOM is ready, execute content
 		 	//var deviceCount=0;		 	
 	 		$.ajax({ 
@@ -144,12 +241,15 @@
 				//and value is the object in the array at position key 
 	        	$.each( result, function( key, value ) { 
 	        		$("#card"+(key+1)+"arbeitsplatz").html(value['dev_arbeitsplatz']);
-		        	$("#card"+(key+1)+"anwendung").html(value['dev_anwendung']);
-		        	$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
-		        	$("#card"+(key+1)+"device").html(value['dev_device']);
+		        	//$("#card"+(key+1)+"anwendung").html("<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>"+value['dev_anwendung']);
+		        	$("#card"+(key+1)+"anwendung").html("<h6>Anwendung:</h6>"+createListGlyphicon(value['dev_anwendung']));
+		        	//$("#card"+(key+1)+"anwendung").html(value['dev_anwendung']);
+		        	$("#card"+(key+1)+"geeignet").html("<h6>Geeignet f&uuml;r:</h6>"+createListGlyphicon(value['dev_geeignet']));
+		        	//$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
+		        	$("#card"+(key+1)+"device").html("<h5><b>"+value['dev_device']+"</b></h5>"+createListGlyphicon(value['dev_beschreibung']));
 		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"> <label class="form-check-label">\n<input type="numerical" class="form-control" name="checkbox" value="1">   ' + value['dev_preis'] + ' EUR p.m.</label><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
 		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"><input type="numerical" class="form-control" name="checkbox" value="0"><span class="input-group-addon" id="basic-addon2">Stk.</span>  ' + value['dev_preis'] + ' EUR p.Stk.p.m.</div>');
-		        	$("#card"+(key+1)+"preis").html('<h5>Preis:  ' + value['dev_preis'] + 'EUR p.Stk.p.m.</h5> <div class="input-group input-group-sm col-lg-5"><input type="numerical" class="form-control" name="dev_amount'+(key+1)+'" value="0" id="dev_amount"><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
+		        	$("#card"+(key+1)+"preis").html('<div class="row"><div class="col-lg-5 my-auto" style="font-size:1.2rem;"> &aacute; ' + value['dev_preis'] + 'EUR</div> <div class="input-group col-lg-5"><input type="numerical" class="form-control" name="dev_amount'+(key+1)+'" value="0" id="dev_amount"><span class="input-group-addon" id="basic-addon2">Stk.</span></div></div>');
 		        	deviceResult.push(parseFloat(value['dev_preis'])); //save price in array for total price calc		        	
 		        	//$("#card"+(key+1)+"preis").html(value['dev_preis']);
 		        	//deviceCount++; //counting the offered devices (devices in DB)
@@ -221,6 +321,8 @@
 	    		console.log('priceresult key '+key+' value '+ value);	
 			});
 		}
+
+		
 			
 	 </script>
 
