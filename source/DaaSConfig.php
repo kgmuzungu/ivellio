@@ -144,19 +144,19 @@
  </div> <!-- end card deck -->
  <!-- </form> -->
  
-  <div class="card text-white" style="border-color:#f35d5d; background-color:#f35d5d;margin-top: 5px;margin-bottom: 5px;">
+  <div class="card text-white" style="border-color:#f35d5d; background-color:#f35d5d;margin-top: .5rem;margin-bottom: .5rem;">
     <div class="card-block">
       <h4 class="card-title my-auto"> <b style="padding-left: 30px;">Endpreis (exkl. MWSt): <span id="endpreis"> 0 </span> EUR p.m.</b></h4>
     </div>
   </div>  
  
-  <div class="card">
+  <div class="card" style="margin-top: .5rem;margin-bottom: .5rem;">
     <div class="card-block">
       <h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="pdfspeichern">Als PDF speichern </span></h4>
     </div>
   </div>   
 
-  <div class="card">
+  <div class="card" style=";margin-top: .5rem;margin-bottom: .5rem;">
     <div class="card-block">
       <a class="anchorAngebot" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
       		<h4 class="card-title my-auto" style="padding-left: 30px;"> 
@@ -244,7 +244,7 @@
 			var end=false;
 			var beginning="";
 			var rest=myString;
-			console.log("in injectGlyphicon");
+			//console.log("in injectGlyphicon");
 			var iStringFirst = "<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>";
 			//var iStringMiddle = "<br>"+iStringFirst;
 			rest = rest.replace(/^/,iStringFirst);
@@ -253,8 +253,8 @@
 					beginning=beginning+rest.substring(0,(rest.indexOf("<br>")+4));
 					rest=rest.substring((rest.indexOf("<br>")+4)); //substring(start,end)
 					rest= rest.replace (/^/,iStringFirst);
-					console.log("in if; beginning " + beginning);
-					console.log("in if; rest "+ rest);
+					//console.log("in if; beginning " + beginning);
+					//console.log("in if; rest "+ rest);
 				} else {
 					end=true;
 				}	 
@@ -267,7 +267,7 @@
 			var end=false;
 			var beginning="";
 			var rest=myString;
-			console.log("in createListGlyphicon");
+			//console.log("in createListGlyphicon");
 			//var strIcon = "<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>";
 			var strIcon = "<i class='fa fa-check' style='color:#868E96'></i>";
 			var strUL = "<ul id='listIcons'>";
@@ -283,8 +283,8 @@
 					beginning = beginning + strLIend; //close list tag at end of string
 					rest=rest.substring((rest.indexOf("<br>")+4)); //substring(start,end)
 					rest= rest.replace (/^/,strLI);
-					console.log("in if; beginning " + beginning);
-					console.log("in if; rest "+ rest);
+					//console.log("in if; beginning " + beginning);
+					//console.log("in if; rest "+ rest);
 				} else {
 					end=true;
 				}	 
@@ -337,7 +337,8 @@
 				//and value is the object in the array at position key 
 	        	$.each( result, function( key, value ) { 
 	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item">' + value['conf_name'] + '</li>');
-	        		$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + ' ' + value['conf_beschreibung'] + '</label></li>');
+	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + ' '  +value['conf_preis']+'EUR<br>'+ value['conf_beschreibung'] + '</label></li>');
+	        		$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + '<span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
 	            }); 
 	       }); //end of done function	
 		}); //end of ready function
@@ -372,11 +373,11 @@
 			var multiplicators=[];
 			var priceResult=deviceResult.slice();
 			//deviceResult global var already has price in it; was set above
-			console.log('amount devices:'+deviceResult.length);
+			//console.log('amount devices:'+deviceResult.length);
 			
 			
 	    	$.each(formSerialArray, function(key, value){
-	    		console.log('key '+key+' name '+ value['name'] +' value '+ value['value']);
+	    		//console.log('key '+key+' name '+ value['name'] +' value '+ value['value']);
 	    		if (value['name'].includes('dev_amount')){
 		    		multiplicators.push(Number(value['value'])); 
 	    			//console.log('dev_amount');
@@ -391,10 +392,10 @@
 					priceResult[i] *= multiplicators[i];
 					totalPrice += priceResult[i];
 		    }
-	    	console.log('totalpreis '+totalPrice);
+	    	//console.log('totalpreis '+totalPrice);
 		    $('#endpreis').html(totalPrice);
     		$.each(priceResult, function(key, value){
-	    		console.log('priceresult key '+key+' value '+ value);	
+	    		//console.log('priceresult key '+key+' value '+ value);	
 			});
 		}
 
