@@ -65,6 +65,11 @@
     	margin:0 5px 0 -15px;
     	color: #000;
 		}
+	.anchorAngebot, .anchorAngebot:hover {
+		color:#000;
+		text-decoration: none;
+		}
+	.textAngebot {padding:1rem 1rem 1rem 1rem;}
 	.btn{margin-bottom:10px;}
 	.bg-primary{background-color:#3e9bff;}
 	.bg-success{background-color:#3bd75e;}
@@ -137,7 +142,7 @@
     </ul>
   </div> 
  </div> <!-- end card deck -->
- </form>
+ <!-- </form> -->
  
   <div class="card text-white" style="border-color:#f35d5d; background-color:#f35d5d;margin-top: 5px;margin-bottom: 5px;">
     <div class="card-block">
@@ -153,18 +158,74 @@
 
   <div class="card">
     <div class="card-block">
-      <a class="" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4"><h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="angebot">Individuelles Angebot anfordern </span></h4>
+      <a class="anchorAngebot" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
+      		<h4 class="card-title my-auto" style="padding-left: 30px;"> 
+      			<span id="angebot">Individuelles Angebot anfordern 
+      			</span></h4>
       </a>
     </div>
     	<div class="collapse" id="collapseExample4">
   			<div class="card">
-  				<ul class="list-group list-group-flush" id="emailInput"></ul>
-  				blablabla<br>blablabla<br>blablabla<br>blablabla<br>blablabla<br>
+  				
+				<!-- ********************************************************* -->
+				
+		<p class="textAngebot">Um Sie zu Ihrer Auswahl beraten zu koennen braeuchten wir ein paar Daten von Ihnen. Ihre Daten werden streng vertraulich behandelt und nicht an Dritte weitergegeben</p>
+		
+	    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" style="text-align:right;">Email</label>
+        <div class="col-sm-5">
+          <input id="email" class="form-control" type="email" placeholder="Email" name="Email" >
+        </div>
+        <div class="col-sm-5 messages"></div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" style="text-align:right;">Vorname</label>
+        <div class="col-sm-5">
+          <input id="firstname" class="form-control" type="text" placeholder="Vorname" name="Vorname" >
+        </div>
+        <div class="col-sm-5 messages"></div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" style="text-align:right;">Nachname</label>
+        <div class="col-sm-5">
+          <input id="lastname" class="form-control" type="text" placeholder="Nachname" name="Nachname" >
+        </div>
+        <div class="col-sm-5 messages"></div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" style="text-align:right;">Firma</label>
+        <div class="col-sm-5">
+          <input id="company" class="form-control" type="text" placeholder="Firma" name="Firma">
+        </div>
+        <div class="col-sm-5 messages">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" style="text-align:right;">Telefon</label>
+        <div class="col-sm-5">
+          <input id="telefone" class="form-control" type="text" pattern="^[0][0-9]{8,14}$" maxlength="14" placeholder="0123456789 keine Sonderzeichen wie + oder / oder -" name="Telefon">
+        </div>
+        <div class="col-sm-5 messages"></div>
+      </div>
+
+      <div class="form-group row">
+      <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+          <button type="submit" class="btn btn-outline-secondary">Versenden</button>
+        </div>
+      </div>
+				
+  				<!-- ********************************************************* -->
+  				
     		</div>
 		</div>
     
   </div>   
- 
+ </form>
 </div> <!-- end container -->
 
 
@@ -215,7 +276,7 @@
 			var strLIend = "</li>";
 			//var iStringMiddle = "<br>"+iStringFirst;
 			rest = rest.replace(/^/,strUL+strLI);
-			/.*\/(.*?)$/
+			
 			while(!end){
 				if (rest.search("<br>")>0){
 					beginning=beginning+rest.substring(0,(rest.indexOf("<br>")));
@@ -298,13 +359,11 @@
 	    	//console.log(queryString);
 		});
 
-		/*//this function should scroll to the bottom of the page when the Angebot was clicked
-		$(document).on('click', "#angebot", function(){
-			console.log( "in angebot!" );
-			//window.scrollTo(0, document.body.scrollHeight);
-			//window.scrollTo(0,document.querySelector(".scrollingContainer").scrollHeight);
-			window.scrollTo(0,document.querySelector("#emailInput").scrollHeight);
-		}); */
+		//this function should scroll to the bottom of the page when any bootstrap collapse was clicked
+		$(document).on('shown.bs.collapse', function(event){
+			//console.log( "in angebot! print e: " +event.type);
+			event.target.scrollIntoView({behavior: "smooth"});
+		}); 
 
 		// this function does not autmatically adopt to more than 3 devices but can be easily modified
 		//formSerialArray is the serialized form = all inputs that are relevant
