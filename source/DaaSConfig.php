@@ -215,7 +215,7 @@
       <div class="form-group row">
       <div class="col-sm-2"></div>
         <div class="col-sm-5">
-          <button type="submit" class="btn btn-outline-secondary">Versenden</button>
+          <button type="button" class="btn btn-outline-secondary" id="submitDaaS">Versenden</button>
         </div>
       </div>
 				
@@ -239,30 +239,6 @@
 		var deviceResult=[]; //global for adding up total price use push() to add array element and pop() to remove
 
 		//takes a string, usually from the DB, and after each <br> it will incect a <i class=...>
-		
-		function injectGlyphicon (myString){
-			var end=false;
-			var beginning="";
-			var rest=myString;
-			//console.log("in injectGlyphicon");
-			var iStringFirst = "<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>";
-			//var iStringMiddle = "<br>"+iStringFirst;
-			rest = rest.replace(/^/,iStringFirst);
-			while(!end){
-				if (rest.search("<br>")>0){
-					beginning=beginning+rest.substring(0,(rest.indexOf("<br>")+4));
-					rest=rest.substring((rest.indexOf("<br>")+4)); //substring(start,end)
-					rest= rest.replace (/^/,iStringFirst);
-					//console.log("in if; beginning " + beginning);
-					//console.log("in if; rest "+ rest);
-				} else {
-					end=true;
-				}	 
-			}
-			//myString = myString.replace(/^/,iString); //regexp ... replace beginning with new iString
-			return beginning+rest;
-		}
-
 		function createListGlyphicon(myString){
 			var end=false;
 			var beginning="";
@@ -366,6 +342,29 @@
 			event.target.scrollIntoView({behavior: "smooth"});
 		}); 
 
+		//catch submit button
+		$("#submitDaaS").on('click', function(event){
+			event.stopPropagation();
+			console.log("in button click\n");
+			var formResult = $('#main_form').serializeArray();
+			var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
+			console.log(formResultJSON);
+			//using jQuery ajax
+			$.ajax({ 
+	          	method: "POST", 
+	          	url: "DaaSConfig_mailClientData.php", 
+	          	data: formResultJSON,
+	          	//dataType:"json",
+	          	contentType: "application/json",
+	         })
+	        .done(function( returnData ) { 
+		        alert("back from sending client data\n" + returnData);
+				//done function :display bootstrap modular on success and give option to go to home page or back to DaaS
+		    });
+		});
+		
+		
+
 		// this function does not autmatically adopt to more than 3 devices but can be easily modified
 		//formSerialArray is the serialized form = all inputs that are relevant
 		function calculateFinalPrice (formSerialArray){
@@ -397,9 +396,7 @@
     		$.each(priceResult, function(key, value){
 	    		//console.log('priceresult key '+key+' value '+ value);	
 			});
-		}
-
-			
+		}		
 	 </script>
 
  </body>
