@@ -314,11 +314,15 @@
 	        	var result = JSON.parse(data); //result form php-service is array
 				allConfigs=result;
 				//key is the loop index = for result this is the index of the array = next object
-				//and value is the object in the array at position key 
+				//and value is the object in the array at position key
+				let count=0; //to start the checkbox labling with a new device from zero again
+				let oldindex=0; 
 	        	$.each( result, function( key, value ) { 
-	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item">' + value['conf_name'] + '</li>');
-	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + ' '  +value['conf_preis']+'EUR<br>'+ value['conf_beschreibung'] + '</label></li>');
-	        		$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + '<span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</input></label></li>');
+	        		//to start the checkbox labling with a new device from zero again
+		        	if (oldindex==Number(value['conf_iddevice'])) { count++; } 
+		        	else {oldindex=Number(value['conf_iddevice']); count=1;}
+	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox"><span>' + value['conf_name'] + '</span><span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
+		        	$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(count)+'" value="' + value['conf_preis'] + '" id="checkbox"><span>' + value['conf_name'] + '</span><span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
 	            }); 
 	       }); //end of done function	
 		}); //end of ready function
@@ -383,20 +387,21 @@
 		//catch submit button
 		$("#submitDaaS").on('click', function(event){
 			event.stopPropagation();
-			console.log("in button click\n");
+			console.log("in function submitDaaS\n");
 			var formResult = $('#main_form').serializeArray();
 			//var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
 			//console.log(formResult);
 
-			createEmailData(formResult);
-						
+			var ret=createEmailData(formResult);
+			var retJSON=JSON.stringify(ret);
+			console.log(retJSON);			
 			//using jQuery ajax
 			$.ajax({ 
 	          	method: "POST", 
 	          	url: "DaaSConfig_mailClientData.php",
-	          	data: formResult, 
+	          	data: retJSON, 
 	          	//data: formResultJSON,
-	          	//dataType:"json",
+	          	dataType:"json",
 	          	//contentType: "application/json",
 	         })
 	        .done(function( returnData ) { 
@@ -407,16 +412,72 @@
 
 
 		function createEmailData (serializedForm){
-			var mailMsg={};
-			//console.log(serializedForm.find(findCherries));
-			//searches in the array of objects for a certain object with name=...
-			if (serializedForm.find(o => o.name === 'dev_amount1').value=='0'){console.log("dev_amount1 is 0");} else {console.log("dev_amount1 is NOT 0 ");}
-			if (serializedForm.find(o => o.name === 'dev_amount2').value=='0'){console.log("dev_amount2 is 0");} else {console.log("dev_amount2 is NOT 0 ");}
-			if (serializedForm.find(o => o.name === 'dev_amount3').value=='0'){console.log("dev_amount3 is 0");} else {console.log("dev_amount3 is NOT 0 ");}
+			var mailMsg=[]; //array
+			var arrCount=0; //for looping through the form array
+			//var i=0;
+			//mailMsg.Person="Karl";
+			//mailMsg.Time="15.00h";
+			//console.log(JSON.stringify(mailMsg)); //{"Person":"Karl","Time":"15.00h"}
+			
+			//console.log("output 1st array element "+serializedForm[0].name);
+			if (serializedForm.find(o => o.name === 'dev_amount1').value=='0') {console.log("dev_amount1 is 0");} 
+			else {
+				let mailObj={}; //empty object
+				arrCount=1; //because dev_amount1 is at index=0
+				mailObj.Category=$("#card1arbeitsplatz").text();
+				mailObj.Amount=serializedForm.find(o => o.name === 'dev_amount1').value;
+				mailObj.DeviceName=$("#card1device b").text();
+				mailObj.DevicePrice=$("#card1preis .row .my-auto").text();
 
-			//var test=$("input[name='checkbox11']").text();
-			var test=$("[name='checkbox11']").next().text();
-			console.log("checkboxtext: "+test);
+				let i=0;
+				while(serializedForm[arrCount].name.includes("check")){
+					i++;
+					console.log(serializedForm[arrCount].name);
+					mailObj['Option'+i]=$("[name='"+ serializedForm[arrCount].name +"']").next().text();
+					mailObj['Option'+i+'Preis']=$("[name='"+ serializedForm[arrCount].name +"']").next().next().text();
+					arrCount++;
+					}
+				mailMsg[0]=mailObj;
+				console.log("dev_amount1 is NOT 0 ");
+			}
+			if (serializedForm.find(o => o.name === 'dev_amount2').value=='0'){console.log("dev_amount2 is 0");} 
+			else {
+				let mailObj={}; //empty object
+				mailObj.Category=$("#card2arbeitsplatz").text();
+				mailObj.Amount=serializedForm.find(o => o.name === 'dev_amount2').value;
+				mailObj.DeviceName=$("#card2device b").text();
+				mailObj.DevicePrice=$("#card2preis .row .my-auto").text();
+				arrCount++; //because jump over dev_amount2 field
+				let i=0;
+				while(serializedForm[arrCount].name.includes("check")){
+					i++;
+					console.log(serializedForm[arrCount].name);
+					mailObj['Option'+i]=$("[name='"+ serializedForm[arrCount].name +"']").next().text();
+					mailObj['Option'+i+'Preis']=$("[name='"+ serializedForm[arrCount].name +"']").next().next().text();
+					arrCount++;
+					}
+				mailMsg[1]=mailObj;
+				console.log("dev_amount2 is NOT 0 ");
+			}
+			if (serializedForm.find(o => o.name === 'dev_amount3').value=='0'){console.log("dev_amount3 is 0");} 
+			else {
+				let mailObj={}; //empty object
+				mailObj.Category=$("#card3arbeitsplatz").text();
+				mailObj.Amount=serializedForm.find(o => o.name === 'dev_amount3').value;
+				mailObj.DeviceName=$("#card3device b").text();
+				mailObj.DevicePrice=$("#card3preis .row .my-auto").text();
+				arrCount++; //because jump over dev_amount2 field
+				let i=0;
+				while(serializedForm[arrCount].name.includes("check")){
+					i++;
+					console.log(serializedForm[arrCount].name);
+					mailObj['Option'+i]=$("[name='"+ serializedForm[arrCount].name +"']").next().text();
+					mailObj['Option'+i+'Preis']=$("[name='"+ serializedForm[arrCount].name +"']").next().next().text();
+					arrCount++;
+					}
+				mailMsg[2]=mailObj;
+				console.log("dev_amount3 is NOT 0 ");
+			}
 
 			//$.each(serializedForm, function(key, value){console.log("serializedForm "+key+" "+value);});
 			/*$.each(allDevices, function(key, value){

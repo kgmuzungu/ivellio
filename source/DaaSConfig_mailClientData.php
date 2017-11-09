@@ -41,9 +41,13 @@ $msg = "List of arguments \n";
 
 
 $receivedData = $_POST;
-//var_error_log($receivedData);
+var_error_log($receivedData);
 
-foreach($receivedData as $key => $value){
+$receivedDataJSONdecode = json_decode($_POST, true);
+//$receivedDataJSONdecode = json_decode($_POST);
+var_error_log($receivedDataJSONdecode);
+
+foreach($receivedDataJSONdecode as $key => $value){
 	//$key is the field name
 	//$value is the actual value
 	$msg = $msg."key:".$key." value:".$value."\n";
