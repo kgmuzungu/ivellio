@@ -82,7 +82,7 @@
 <form id="main_form">
 <div class="card-deck">
   <div class="card">
-  	 <div class="card-header" style="background-color:#3e9bff;"><h5 style="font-weight:bold;" id="card1arbeitsplatz"></h4></div>
+  	 <div class="card-header" style="background-color:#3e9bff;"><h5 style="font-weight:bold;" id="card1arbeitsplatz"></h5></div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item " id="card1anwendung">Cras justo odio</li>
       <li class="list-group-item" id="card1geeignet">Dapibus ac facilisis in</li>
@@ -102,7 +102,7 @@
     </ul>
   </div>
   <div class="card">
-  	 <div class="card-header" style="background-color:#3bd75e;"><h5 style="font-weight:bold;" id="card2arbeitsplatz"></h4></div>
+  	 <div class="card-header" style="background-color:#3bd75e;"><h5 style="font-weight:bold;" id="card2arbeitsplatz"></h5></div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item" id="card2anwendung">Cras justo odio</li>
       <li class="list-group-item" id="card2geeignet">Dapibus ac facilisis in</li>
@@ -122,7 +122,7 @@
     </ul>
   </div>
   <div class="card">
-  	 <div class="card-header bg-warning"><h5 style="font-weight:bold;" id="card3arbeitsplatz"></h4></div>
+  	 <div class="card-header bg-warning"><h5 style="font-weight:bold;" id="card3arbeitsplatz"></h5></div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item" id="card3anwendung">Cras justo odio</li>
       <li class="list-group-item" id="card3geeignet">Dapibus ac facilisis in</li>
@@ -236,7 +236,9 @@
 	 <script>
 	 	//the following is using jQuery
 	 	var deviceCount=0; //global var
-		var deviceResult=[]; //global for adding up total price use push() to add array element and pop() to remove
+		var deviceResult=[]; //for calculating the end price; global for adding up total price use push() to add array element and pop() to remove
+		var allDevices=[];
+		var allConfigs=[];
 
 		//takes a string, usually from the DB, and after each <br> it will incect a <i class=...>
 		function createListGlyphicon(myString){
@@ -273,12 +275,13 @@
 		 	//var deviceCount=0;		 	
 	 		$.ajax({ 
 	          	method: "POST", 
-	          	url: "DaaSConfig_getDevices.php", 
+	          	url: "DaaSConfig_getDevices.php",
+	          //dataType:"json" 
 	         })
 	        .done(function( data ) { 
 	        	//console.dir(data);      // print to consol for debug
 	        	var result = JSON.parse(data); //result form php-service is array
-
+	        	allDevices=result;
 	        	//result is an array of objects
 				//console.dir('\n output ' + result[1].dev_arbeitsplatz);
 				
@@ -303,18 +306,19 @@
 	       }); //end of done function
 	 		$.ajax({ 
 	          	method: "POST", 
-	          	url: "DaaSConfig_getConfig.php", 
+	          	url: "DaaSConfig_getConfig.php",
+	          //dataType:"json" 
 	         })
 	        .done(function( data ) { 
 	        	//console.dir(data);      // print to consol for debug
 	        	var result = JSON.parse(data); //result form php-service is array
-
+				allConfigs=result;
 				//key is the loop index = for result this is the index of the array = next object
 				//and value is the object in the array at position key 
 	        	$.each( result, function( key, value ) { 
 	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item">' + value['conf_name'] + '</li>');
 	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + ' '  +value['conf_preis']+'EUR<br>'+ value['conf_beschreibung'] + '</label></li>');
-	        		$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + '<span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
+	        		$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox">' + value['conf_name'] + '<span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</input></label></li>');
 	            }); 
 	       }); //end of done function	
 		}); //end of ready function
@@ -341,29 +345,6 @@
 			//console.log( "in angebot! print e: " +event.type);
 			event.target.scrollIntoView({behavior: "smooth"});
 		}); 
-
-		//catch submit button
-		$("#submitDaaS").on('click', function(event){
-			event.stopPropagation();
-			console.log("in button click\n");
-			var formResult = $('#main_form').serializeArray();
-			var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
-			console.log(formResultJSON);
-			//using jQuery ajax
-			$.ajax({ 
-	          	method: "POST", 
-	          	url: "DaaSConfig_mailClientData.php", 
-	          	data: formResultJSON,
-	          	//dataType:"json",
-	          	contentType: "application/json",
-	         })
-	        .done(function( returnData ) { 
-		        alert("back from sending client data\n" + returnData);
-				//done function :display bootstrap modular on success and give option to go to home page or back to DaaS
-		    });
-		});
-		
-		
 
 		// this function does not autmatically adopt to more than 3 devices but can be easily modified
 		//formSerialArray is the serialized form = all inputs that are relevant
@@ -393,10 +374,60 @@
 		    }
 	    	//console.log('totalpreis '+totalPrice);
 		    $('#endpreis').html(totalPrice);
-    		$.each(priceResult, function(key, value){
+    		//$.each(priceResult, function(key, value){
 	    		//console.log('priceresult key '+key+' value '+ value);	
-			});
+			//});
 		}		
+
+
+		//catch submit button
+		$("#submitDaaS").on('click', function(event){
+			event.stopPropagation();
+			console.log("in button click\n");
+			var formResult = $('#main_form').serializeArray();
+			//var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
+			//console.log(formResult);
+
+			createEmailData(formResult);
+						
+			//using jQuery ajax
+			$.ajax({ 
+	          	method: "POST", 
+	          	url: "DaaSConfig_mailClientData.php",
+	          	data: formResult, 
+	          	//data: formResultJSON,
+	          	//dataType:"json",
+	          	//contentType: "application/json",
+	         })
+	        .done(function( returnData ) { 
+		        alert("back from sending client data\n" + returnData);
+				//done function :display bootstrap modular on success and give option to go to home page or back to DaaS
+		    });
+		});
+
+
+		function createEmailData (serializedForm){
+			var mailMsg={};
+			//console.log(serializedForm.find(findCherries));
+			//searches in the array of objects for a certain object with name=...
+			if (serializedForm.find(o => o.name === 'dev_amount1').value=='0'){console.log("dev_amount1 is 0");} else {console.log("dev_amount1 is NOT 0 ");}
+			if (serializedForm.find(o => o.name === 'dev_amount2').value=='0'){console.log("dev_amount2 is 0");} else {console.log("dev_amount2 is NOT 0 ");}
+			if (serializedForm.find(o => o.name === 'dev_amount3').value=='0'){console.log("dev_amount3 is 0");} else {console.log("dev_amount3 is NOT 0 ");}
+
+			//var test=$("input[name='checkbox11']").text();
+			var test=$("[name='checkbox11']").next().text();
+			console.log("checkboxtext: "+test);
+
+			//$.each(serializedForm, function(key, value){console.log("serializedForm "+key+" "+value);});
+			/*$.each(allDevices, function(key, value){
+				console.log("outer array "+key+" "+value);
+				$.each(value, function(key2, value2){
+					console.log("inner array "+key2+" "+value2);
+				});	
+			});*/
+			
+			return mailMsg;
+		}
 	 </script>
 
  </body>
