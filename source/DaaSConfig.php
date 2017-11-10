@@ -389,8 +389,8 @@
 			event.stopPropagation();
 			console.log("in function submitDaaS\n");
 			var formResult = $('#main_form').serializeArray();
-			//var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
-			//console.log(formResult);
+			var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
+			console.log(formResult);
 
 			var ret=createEmailData(formResult);
 			var retJSON=JSON.stringify(ret);
@@ -399,9 +399,10 @@
 			$.ajax({ 
 	          	method: "POST", 
 	          	url: "DaaSConfig_mailClientData.php",
-	          	data: retJSON, 
-	          	//data: formResultJSON,
+	          	//data: retJSON, 
+	          	data:{data:retJSON},
 	          	dataType:"json",
+	          	//contentType: "application/json; charset=utf-8",
 	          	//contentType: "application/json",
 	         })
 	        .done(function( returnData ) { 
@@ -414,20 +415,27 @@
 		function createEmailData (serializedForm){
 			var mailMsg=[]; //array
 			var arrCount=0; //for looping through the form array
-			//var i=0;
-			//mailMsg.Person="Karl";
-			//mailMsg.Time="15.00h";
-			//console.log(JSON.stringify(mailMsg)); //{"Person":"Karl","Time":"15.00h"}
 			
+			//get client data
+			let mailObj={}; //empty object
+			mailObj.Email=serializedForm.find(o => o.name === 'Email').value;
+			mailObj.Vorname=serializedForm.find(o => o.name === 'Vorname').value;
+			mailObj.Nachname=serializedForm.find(o => o.name === 'Nachname').value;
+			mailObj.Firma=serializedForm.find(o => o.name === 'Firma').value;
+			mailObj.Telefon=serializedForm.find(o => o.name === 'Telefon').value;
+			//mailObj.Kommentar=serializedForm.find(o => o.name === 'Kommentar').value;
+			mailMsg[0]=mailObj;
+			
+			//get order data from website
 			//console.log("output 1st array element "+serializedForm[0].name);
 			if (serializedForm.find(o => o.name === 'dev_amount1').value=='0') {console.log("dev_amount1 is 0");} 
 			else {
 				let mailObj={}; //empty object
 				arrCount=1; //because dev_amount1 is at index=0
-				mailObj.Category=$("#card1arbeitsplatz").text();
-				mailObj.Amount=serializedForm.find(o => o.name === 'dev_amount1').value;
-				mailObj.DeviceName=$("#card1device b").text();
-				mailObj.DevicePrice=$("#card1preis .row .my-auto").text();
+				mailObj.Kategorie=$("#card1arbeitsplatz").text();
+				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount1').value;
+				mailObj.Produkt=$("#card1device b").text();
+				mailObj.Preis=$("#card1preis .row .my-auto").text();
 
 				let i=0;
 				while(serializedForm[arrCount].name.includes("check")){
@@ -437,35 +445,16 @@
 					mailObj['Option'+i+'Preis']=$("[name='"+ serializedForm[arrCount].name +"']").next().next().text();
 					arrCount++;
 					}
-				mailMsg[0]=mailObj;
+				mailMsg[1]=mailObj;
 				console.log("dev_amount1 is NOT 0 ");
 			}
 			if (serializedForm.find(o => o.name === 'dev_amount2').value=='0'){console.log("dev_amount2 is 0");} 
 			else {
 				let mailObj={}; //empty object
-				mailObj.Category=$("#card2arbeitsplatz").text();
-				mailObj.Amount=serializedForm.find(o => o.name === 'dev_amount2').value;
-				mailObj.DeviceName=$("#card2device b").text();
-				mailObj.DevicePrice=$("#card2preis .row .my-auto").text();
-				arrCount++; //because jump over dev_amount2 field
-				let i=0;
-				while(serializedForm[arrCount].name.includes("check")){
-					i++;
-					console.log(serializedForm[arrCount].name);
-					mailObj['Option'+i]=$("[name='"+ serializedForm[arrCount].name +"']").next().text();
-					mailObj['Option'+i+'Preis']=$("[name='"+ serializedForm[arrCount].name +"']").next().next().text();
-					arrCount++;
-					}
-				mailMsg[1]=mailObj;
-				console.log("dev_amount2 is NOT 0 ");
-			}
-			if (serializedForm.find(o => o.name === 'dev_amount3').value=='0'){console.log("dev_amount3 is 0");} 
-			else {
-				let mailObj={}; //empty object
-				mailObj.Category=$("#card3arbeitsplatz").text();
-				mailObj.Amount=serializedForm.find(o => o.name === 'dev_amount3').value;
-				mailObj.DeviceName=$("#card3device b").text();
-				mailObj.DevicePrice=$("#card3preis .row .my-auto").text();
+				mailObj.Kategorie=$("#card2arbeitsplatz").text();
+				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount2').value;
+				mailObj.Produkt=$("#card2device b").text();
+				mailObj.Preis=$("#card2preis .row .my-auto").text();
 				arrCount++; //because jump over dev_amount2 field
 				let i=0;
 				while(serializedForm[arrCount].name.includes("check")){
@@ -476,8 +465,32 @@
 					arrCount++;
 					}
 				mailMsg[2]=mailObj;
+				console.log("dev_amount2 is NOT 0 ");
+			}
+			if (serializedForm.find(o => o.name === 'dev_amount3').value=='0'){console.log("dev_amount3 is 0");} 
+			else {
+				let mailObj={}; //empty object
+				mailObj.Kategorie=$("#card3arbeitsplatz").text();
+				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount3').value;
+				mailObj.Produkt=$("#card3device b").text();
+				mailObj.Preis=$("#card3preis .row .my-auto").text();
+				arrCount++; //because jump over dev_amount2 field
+				let i=0;
+				while(serializedForm[arrCount].name.includes("check")){
+					i++;
+					console.log(serializedForm[arrCount].name);
+					mailObj['Option'+i]=$("[name='"+ serializedForm[arrCount].name +"']").next().text();
+					mailObj['Option'+i+'Preis']=$("[name='"+ serializedForm[arrCount].name +"']").next().next().text();
+					arrCount++;
+					}
+				mailMsg[3]=mailObj;
 				console.log("dev_amount3 is NOT 0 ");
 			}
+
+			mailObj={}; //empty object
+			mailObj.Endpreis = $("#endpreis").text();
+			mailMsg[4]=mailObj;
+			
 
 			//$.each(serializedForm, function(key, value){console.log("serializedForm "+key+" "+value);});
 			/*$.each(allDevices, function(key, value){

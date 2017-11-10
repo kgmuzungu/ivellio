@@ -20,8 +20,6 @@ function var_error_log($mixed) {
 //check if $_POST is not empty
 //if(isset($_POST
 
-
-
 //save $_POST array to local var
 //$jsonReceiveData = json_encode($_POST);
 
@@ -29,37 +27,40 @@ function var_error_log($mixed) {
 //var_error_log($jsonReceiveData);
 
 // the message
-$msg = "List of arguments \n";
-
-// use wordwrap() if lines are longer than 70 characters
 
 
-// send email
+//$receivedData = $_POST;
+//var_error_log($receivedData);
 
-
-
-
-
-$receivedData = $_POST;
-var_error_log($receivedData);
-
-$receivedDataJSONdecode = json_decode($_POST, true);
+$receivedDataJSONdecoded = json_decode($_POST['data'], true);
 //$receivedDataJSONdecode = json_decode($_POST);
-var_error_log($receivedDataJSONdecode);
+//var_error_log($receivedDataJSONdecoded);
 
-foreach($receivedDataJSONdecode as $key => $value){
-	//$key is the field name
-	//$value is the actual value
-	$msg = $msg."key:".$key." value:".$value."\n";
-	echo $key;
-	echo ">>>";
-	echo $value;
-	echo "***";
+$emailMsg = "DaaS Anfrage von Herrn/Frau ".($receivedDataJSONdecoded[0]['Vorname'])." ".($receivedDataJSONdecoded[0]['Nachname']).",\n\n";
+$emailMsg = $emailMsg."von Firma:      ".($receivedDataJSONdecoded[0]['Firma'])."\n";
+$emailMsg = $emailMsg."Telefonnummer:  ".($receivedDataJSONdecoded[0]['Telefon'])."\n";
+$emailMsg = $emailMsg."Emailadresse:   ".($receivedDataJSONdecoded[0]['Email'])."\n\n";
+$emailMsg = $emailMsg."Diese Geraete und Optionen wurden ausgewaehlt:\n";
+
+var_error_log($emailMsg);
+var_error_log($receivedDataJSONdecoded[0]);
+
+$msg ="";
+//two cascaded arrays; outer array max 3 elements =  3 diferent Arbeitsplaetze; inner array info amount plus options
+foreach($receivedDataJSONdecoded as $key => $value){
+	if ($key!=0) {
+		foreach ($value as $key2 => $value2){
+			$emailMsg= $emailMsg."  ".$key2.": ".$value2."\n";
+		}
+	}
+	$emailMsg=$emailMsg."\n";
 }
-echo "***end";
 
-$msg = wordwrap($msg,70);
-//mail("webdev@WebLAMP.WebLAMP.at","DaaSConfig",$msg);
+//$emailMsg=$emailMsg."\n\nDieses ist zur internen Verwendung gedacht\n";
 
-//echo $jsonReceiveData;
+//use wordwrap() if lines are longer than 70 characters
+$emailMsg= wordwrap($emailMsg,70);
+mail("webdev@WebLAMP.WebLAMP.at","DaaSConfig",$emailMsg);
+
+//echo json_encode($msg);
 ?>
