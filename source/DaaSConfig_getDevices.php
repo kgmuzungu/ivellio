@@ -1,6 +1,4 @@
 <?php
-//tutorial
-//https://programmerblog.net/jquery-ajax-get-example-php-mysql/
 
 $Devices = array();
 
@@ -21,11 +19,7 @@ if (!$result = $mysqli->query("SELECT * FROM devices")){
 //$i=0;
 if ($result->num_rows > 0){
 	while($row = $result->fetch_assoc()){
-		//$Devices[$i] = $row['LoesungName'];
-		//array_push($Devices, $row['LoesungName']);
 		array_push($Devices, $row);
-		//echo $Devices[$i] . '<br />';
-		//$i++;
 	}
 }
 

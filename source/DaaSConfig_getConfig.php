@@ -1,6 +1,4 @@
 <?php
-//tutorial
-//https://programmerblog.net/jquery-ajax-get-example-php-mysql/
 
 $Devices = array();
 
@@ -13,20 +11,14 @@ if ($mysqli->connect_errno) {
 }
 $mysqli->set_charset("utf8");
 
-//if (!$result = $mysqli->query("SELECT LoesungName FROM Loesungen")){
 //if (!$result = $mysqli->query("SELECT * FROM config")){
 if (!$result = $mysqli->query("SELECT * FROM config ORDER BY conf_order")){
 	echo "there was an error" . $mysqli->error;
 }
 
-//$i=0;
 if ($result->num_rows > 0){
 	while($row = $result->fetch_assoc()){
-		//$Devices[$i] = $row['LoesungName'];
-		//array_push($Devices, $row['LoesungName']);
 		array_push($Devices, $row);
-		//echo $Devices[$i] . '<br />';
-		//$i++;
 	}
 }
 

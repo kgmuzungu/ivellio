@@ -7,23 +7,11 @@
  <head>
   <title>Device as a Service</title>
   <meta charset="UTF-8">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"> -->
-  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script> -->
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/popper.min.js"></script> -->
-  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
   <style>
   	@font-face {
     	font-family: GlyphaLT55;
@@ -272,13 +260,11 @@
 			var beginning="";
 			var rest=myString;
 			//console.log("in createListGlyphicon");
-			//var strIcon = "<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>";
 			var strIcon = "<i class='fa fa-check' style='color:#868E96'></i>";
 			var strUL = "<ul id='listIcons'>";
 			var strULend ="</ul>";
 			var strLI = "<li id='listIcons'>";
 			var strLIend = "</li>";
-			//var iStringMiddle = "<br>"+iStringFirst;
 			rest = rest.replace(/^/,strUL+strLI);
 			
 			while(!end){
@@ -315,19 +301,12 @@
 				//and value is the object in the array at position key 
 	        	$.each( result, function( key, value ) { 
 	        		$("#card"+(key+1)+"arbeitsplatz").html(value['dev_arbeitsplatz']);
-		        	//$("#card"+(key+1)+"anwendung").html("<i class='fa fa-check' aria-hidden='true' style='color:#868E96'></i>"+value['dev_anwendung']);
 		        	$("#card"+(key+1)+"anwendung").html("<h6>Anwendung:</h6>"+createListGlyphicon(value['dev_anwendung']));
-		        	//$("#card"+(key+1)+"anwendung").html(value['dev_anwendung']);
 		        	$("#card"+(key+1)+"geeignet").html("<h6>Geeignet f&uuml;r:</h6>"+createListGlyphicon(value['dev_geeignet']));
-		        	//$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
 		        	$("#card"+(key+1)+"device").html("<h5><span style='font-weight:bold;'>"+value['dev_device']+"</span></h5>"+createListGlyphicon(value['dev_beschreibung']));
 		        	$("#card"+(key+1)+"image").html("<img class='card-img-top' src='"+value['dev_imagepath']+"' alt='"+value['dev_device']+"'>");
-		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"> <label class="form-check-label">\n<input type="numerical" class="form-control" name="checkbox" value="1">   ' + value['dev_preis'] + ' EUR pro Monat</label><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
-		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"><input type="numerical" class="form-control" name="checkbox" value="0"><span class="input-group-addon" id="basic-addon2">Stk.</span>  ' + value['dev_preis'] + ' EUR p.Stk.p.m.</div>');
 		        	$("#card"+(key+1)+"preis").html('<div class="row"><div class="col-sm-5 my-auto" style="font-size:1.2rem;"> &aacute; ' + value['dev_preis'] + 'EUR</div> <div class="input-group col-sm-5"><input type="numerical" class="form-control" name="dev_amount'+(key+1)+'" value="0" id="dev_amount"><span class="input-group-addon hidden-print" id="basic-addon2">Stk.</span></div></div>');
 		        	deviceResult.push(parseFloat(value['dev_preis'])); //save price in array for total price calc		        	
-		        	//$("#card"+(key+1)+"preis").html(value['dev_preis']);
-		        	//deviceCount++; //counting the offered devices (devices in DB)
 	            }); 
 	       }); //end of done function
 	 		$.ajax({ 
@@ -429,7 +408,6 @@
 	          	data:{data:retJSON},
 	          	dataType:"json",
 	          	//contentType: "application/json; charset=utf-8",
-	          	//contentType: "application/json",
 	         })
 	        .done(function( returnData ) { 
 		        alert("back from sending client data\n" + returnData);
@@ -512,20 +490,9 @@
 				mailMsg[3]=mailObj;
 				console.log("dev_amount3 is NOT 0 ");
 			}
-
 			mailObj={}; //empty object
 			mailObj.Endpreis = $("#endpreis").text();
-			mailMsg[4]=mailObj;
-			
-
-			//$.each(serializedForm, function(key, value){console.log("serializedForm "+key+" "+value);});
-			/*$.each(allDevices, function(key, value){
-				console.log("outer array "+key+" "+value);
-				$.each(value, function(key2, value2){
-					console.log("inner array "+key2+" "+value2);
-				});	
-			});*/
-			
+			mailMsg[4]=mailObj;			
 			return mailMsg;
 		}
 
@@ -534,7 +501,6 @@
 			$('#collapseExample1').collapse('show');
 			$('#collapseExample2').collapse('show');
 			$('#collapseExample3').collapse('show');
-			//setTimeout(function(){window.print();}, 1000);
 			window.print();
 		});
 	 </script>
