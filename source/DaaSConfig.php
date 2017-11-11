@@ -73,7 +73,19 @@
 	.btn{margin-bottom:10px;}
 	.bg-primary{background-color:#3e9bff;}
 	.bg-success{background-color:#3bd75e;}
-  
+  </style>
+  <style type="text/css" media="print">
+  	@page { size: landscape; }
+  	.hidden-print { display: none !important; }
+  	body, h1, h2, h3, h4, h5,h6, ol, ul, div, span, p {
+        display: block !important;
+        /*width: auto !important;*/
+        float: none !important;
+        position: static !important;
+        overflow: visible !important;
+        }
+    .card-img-top {width: 6cm;}
+    .form-check-input{margin-left: -.6cm;}
   </style>
  </head>
  <body>
@@ -146,17 +158,17 @@
  
   <div class="card text-white" style="border-color:#f35d5d; background-color:#f35d5d;margin-top: .5rem;margin-bottom: .5rem;">
     <div class="card-block">
-      <h4 class="card-title my-auto"> <b style="padding-left: 30px;">Endpreis (exkl. MWSt): <span id="endpreis"> 0 </span> EUR p.m.</b></h4>
+      <h4 class="card-title my-auto"> <b style="padding-left: 30px;">Endpreis (exkl. MWSt): <span id="endpreis"> 0 </span> EUR pro Monat</b></h4>
     </div>
   </div>  
  
-  <div class="card" style="margin-top: .5rem;margin-bottom: .5rem;">
+  <div class="card hidden-print" style="margin-top: .5rem;margin-bottom: .5rem;" >
     <div class="card-block">
-      <h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="pdfspeichern">Als PDF speichern </span></h4>
+      <h4 class="card-title my-auto" style="padding-left: 30px;"> <span id="pdfspeichern">Auswahl drucken (oder als PDF speichern) </span></h4>
     </div>
   </div>   
 
-  <div class="card" style=";margin-top: .5rem;margin-bottom: .5rem;">
+  <div class="card hidden-print" style=";margin-top: .5rem;margin-bottom: .5rem;">
     <div class="card-block">
       <a class="anchorAngebot" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
       		<h4 class="card-title my-auto" style="padding-left: 30px;"> 
@@ -169,7 +181,12 @@
   				
 				<!-- ********************************************************* -->
 				
-		<p class="textAngebot">Um Sie zu Ihrer Auswahl beraten zu koennen braeuchten wir ein paar Daten von Ihnen. Ihre Daten werden streng vertraulich behandelt und nicht an Dritte weitergegeben</p>
+		<p class="textAngebot">Nicht exakt das dabei was Sie suchen? Wollen Sie andere Optionen oder haben Sie eine Frage? 
+		Oder ist vielleicht gar kein Arbeitsplatz fuer Sie dabei?
+		<br>Kein Problem mit Ihrer Auswahl oben oder/und Ihrem Kommentar werden wir fuer Sie die geeigneste Loesung finden.
+		Natuerlich mit unserm Device-as-a-Service Konzept zur monatlichen Miete
+		<br>Bitte fuellen Sie dieses Formular aus damit wir Sie mit unserer Loesung kontaktieren koennen. 
+		(Falls Sie oben eine Auswahl getroffen haben, wird diese an uns mituebermittelt)</p>
 		
 	    <div class="form-group row">
         <label class="col-sm-2 col-form-label" style="text-align:right;">Email</label>
@@ -211,6 +228,15 @@
         </div>
         <div class="col-sm-5 messages"></div>
       </div>
+
+	  <div class="form-group row">
+        <label class="col-sm-2 col-form-label" style="text-align:right;">Ihr Kommentar</label>
+        <div class="col-sm-5">
+          <textarea id="kommentar" class="form-control" rows="4" cols="80" maxlength="1000" placeholder="Hier koennen Sie uns Fragen und Wuensche mitteilen" name="Kommentar"></textarea>
+        </div>
+        <div class="col-sm-5 messages"></div>
+      </div>
+	  
 
       <div class="form-group row">
       <div class="col-sm-2"></div>
@@ -294,11 +320,11 @@
 		        	//$("#card"+(key+1)+"anwendung").html(value['dev_anwendung']);
 		        	$("#card"+(key+1)+"geeignet").html("<h6>Geeignet f&uuml;r:</h6>"+createListGlyphicon(value['dev_geeignet']));
 		        	//$("#card"+(key+1)+"geeignet").html(value['dev_geeignet']);
-		        	$("#card"+(key+1)+"device").html("<h5><b>"+value['dev_device']+"</b></h5>"+createListGlyphicon(value['dev_beschreibung']));
+		        	$("#card"+(key+1)+"device").html("<h5><span style='font-weight:bold;'>"+value['dev_device']+"</span></h5>"+createListGlyphicon(value['dev_beschreibung']));
 		        	$("#card"+(key+1)+"image").html("<img class='card-img-top' src='"+value['dev_imagepath']+"' alt='"+value['dev_device']+"'>");
-		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"> <label class="form-check-label">\n<input type="numerical" class="form-control" name="checkbox" value="1">   ' + value['dev_preis'] + ' EUR p.m.</label><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
+		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"> <label class="form-check-label">\n<input type="numerical" class="form-control" name="checkbox" value="1">   ' + value['dev_preis'] + ' EUR pro Monat</label><span class="input-group-addon" id="basic-addon2">Stk.</span></div>');
 		        	//$("#card"+(key+1)+"preis").html('<div class="input-group input-group-sm"><input type="numerical" class="form-control" name="checkbox" value="0"><span class="input-group-addon" id="basic-addon2">Stk.</span>  ' + value['dev_preis'] + ' EUR p.Stk.p.m.</div>');
-		        	$("#card"+(key+1)+"preis").html('<div class="row"><div class="col-lg-5 my-auto" style="font-size:1.2rem;"> &aacute; ' + value['dev_preis'] + 'EUR</div> <div class="input-group col-lg-5"><input type="numerical" class="form-control" name="dev_amount'+(key+1)+'" value="0" id="dev_amount"><span class="input-group-addon" id="basic-addon2">Stk.</span></div></div>');
+		        	$("#card"+(key+1)+"preis").html('<div class="row"><div class="col-sm-5 my-auto" style="font-size:1.2rem;"> &aacute; ' + value['dev_preis'] + 'EUR</div> <div class="input-group col-sm-5"><input type="numerical" class="form-control" name="dev_amount'+(key+1)+'" value="0" id="dev_amount"><span class="input-group-addon hidden-print" id="basic-addon2">Stk.</span></div></div>');
 		        	deviceResult.push(parseFloat(value['dev_preis'])); //save price in array for total price calc		        	
 		        	//$("#card"+(key+1)+"preis").html(value['dev_preis']);
 		        	//deviceCount++; //counting the offered devices (devices in DB)
@@ -319,10 +345,10 @@
 				let oldindex=0; 
 	        	$.each( result, function( key, value ) { 
 	        		//to start the checkbox labling with a new device from zero again
-		        	if (oldindex==Number(value['conf_iddevice'])) { count++; } 
-		        	else {oldindex=Number(value['conf_iddevice']); count=1;}
+		        	if (oldindex==Number(value['conf_iddevice_fk'])) { count++; } 
+		        	else {oldindex=Number(value['conf_iddevice_fk']); count=1;}
 	        		//$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(key+1)+'" value="' + value['conf_preis'] + '" id="checkbox"><span>' + value['conf_name'] + '</span><span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
-		        	$("#conf"+(value['conf_iddevice'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice'])+(count)+'" value="' + value['conf_preis'] + '" id="checkbox"><span>' + value['conf_name'] + '</span><span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
+		        	$("#conf"+(value['conf_iddevice_fk'])).append('<li class="list-group-item"> <label class="form-check-label" style="width:100%;">\n<input type="checkbox" class="form-check-input" name="checkbox'+(value['conf_iddevice_fk'])+(count)+'" value="' + value['conf_preis'] + '" id="checkbox"><span>' + value['conf_name'] + '</span><span class="pull-right"> ' +value['conf_preis']+'EUR</span><br>'+ value['conf_beschreibung'] + '</label></li>');
 	            }); 
 	       }); //end of done function	
 		}); //end of ready function
@@ -423,7 +449,7 @@
 			mailObj.Nachname=serializedForm.find(o => o.name === 'Nachname').value;
 			mailObj.Firma=serializedForm.find(o => o.name === 'Firma').value;
 			mailObj.Telefon=serializedForm.find(o => o.name === 'Telefon').value;
-			//mailObj.Kommentar=serializedForm.find(o => o.name === 'Kommentar').value;
+			mailObj.Kommentar=serializedForm.find(o => o.name === 'Kommentar').value;
 			mailMsg[0]=mailObj;
 			
 			//get order data from website
@@ -434,7 +460,7 @@
 				arrCount=1; //because dev_amount1 is at index=0
 				mailObj.Kategorie=$("#card1arbeitsplatz").text();
 				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount1').value;
-				mailObj.Produkt=$("#card1device b").text();
+				mailObj.Produkt=$("#card1device span").text();
 				mailObj.Preis=$("#card1preis .row .my-auto").text();
 
 				let i=0;
@@ -453,7 +479,7 @@
 				let mailObj={}; //empty object
 				mailObj.Kategorie=$("#card2arbeitsplatz").text();
 				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount2').value;
-				mailObj.Produkt=$("#card2device b").text();
+				mailObj.Produkt=$("#card2device span").text();
 				mailObj.Preis=$("#card2preis .row .my-auto").text();
 				arrCount++; //because jump over dev_amount2 field
 				let i=0;
@@ -472,7 +498,7 @@
 				let mailObj={}; //empty object
 				mailObj.Kategorie=$("#card3arbeitsplatz").text();
 				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount3').value;
-				mailObj.Produkt=$("#card3device b").text();
+				mailObj.Produkt=$("#card3device span").text();
 				mailObj.Preis=$("#card3preis .row .my-auto").text();
 				arrCount++; //because jump over dev_amount2 field
 				let i=0;
@@ -502,6 +528,15 @@
 			
 			return mailMsg;
 		}
+
+		$("#pdfspeichern").on('click', function(event){
+			//$('.collapse').collapse();
+			$('#collapseExample1').collapse('show');
+			$('#collapseExample2').collapse('show');
+			$('#collapseExample3').collapse('show');
+			//setTimeout(function(){window.print();}, 1000);
+			window.print();
+		});
 	 </script>
 
  </body>

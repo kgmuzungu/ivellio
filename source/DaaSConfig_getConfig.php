@@ -14,7 +14,8 @@ if ($mysqli->connect_errno) {
 $mysqli->set_charset("utf8");
 
 //if (!$result = $mysqli->query("SELECT LoesungName FROM Loesungen")){
-if (!$result = $mysqli->query("SELECT * FROM config")){
+//if (!$result = $mysqli->query("SELECT * FROM config")){
+if (!$result = $mysqli->query("SELECT * FROM config ORDER BY conf_order")){
 	echo "there was an error" . $mysqli->error;
 }
 

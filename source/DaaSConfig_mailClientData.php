@@ -39,7 +39,9 @@ $receivedDataJSONdecoded = json_decode($_POST['data'], true);
 $emailMsg = "DaaS Anfrage von Herrn/Frau ".($receivedDataJSONdecoded[0]['Vorname'])." ".($receivedDataJSONdecoded[0]['Nachname']).",\n\n";
 $emailMsg = $emailMsg."von Firma:      ".($receivedDataJSONdecoded[0]['Firma'])."\n";
 $emailMsg = $emailMsg."Telefonnummer:  ".($receivedDataJSONdecoded[0]['Telefon'])."\n";
-$emailMsg = $emailMsg."Emailadresse:   ".($receivedDataJSONdecoded[0]['Email'])."\n\n";
+$emailMsg = $emailMsg."Emailadresse:   ".($receivedDataJSONdecoded[0]['Email'])."\n";
+$emailMsg = $emailMsg."Kommentar:      ".($receivedDataJSONdecoded[0]['Kommentar'])."\n\n";
+
 $emailMsg = $emailMsg."Diese Geraete und Optionen wurden ausgewaehlt:\n";
 
 var_error_log($emailMsg);
