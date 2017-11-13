@@ -1,16 +1,6 @@
 <?php
-//tutorial
-//https://programmerblog.net/jquery-ajax-get-example-php-mysql/
-
 //function var_error_log($mixed = null) {
 function var_error_log($mixed) {
-		
-	//ob_start();
-	//var_dump($mixed);
-	//$content = ob_get_contents();
-	//ob_end_clean();
-	//error_log( $mixed ); 
-	//return $content;
 	ob_start();
 	var_dump($mixed);
 	error_log(ob_get_clean());
@@ -19,18 +9,6 @@ function var_error_log($mixed) {
 
 //check if $_POST is not empty
 //if(isset($_POST
-
-//save $_POST array to local var
-//$jsonReceiveData = json_encode($_POST);
-
-//$jsonReceiveData = json_decode($_POST);
-//var_error_log($jsonReceiveData);
-
-// the message
-
-
-//$receivedData = $_POST;
-//var_error_log($receivedData);
 
 $receivedDataJSONdecoded = json_decode($_POST['data'], true);
 //$receivedDataJSONdecode = json_decode($_POST);
@@ -44,10 +22,9 @@ $emailMsg = $emailMsg."Kommentar:      ".($receivedDataJSONdecoded[0]['Kommentar
 
 $emailMsg = $emailMsg."Diese Geraete und Optionen wurden ausgewaehlt:\n";
 
-var_error_log($emailMsg);
-var_error_log($receivedDataJSONdecoded[0]);
+//var_error_log($emailMsg);
+//var_error_log($receivedDataJSONdecoded[0]);
 
-$msg ="";
 //two cascaded arrays; outer array max 3 elements =  3 diferent Arbeitsplaetze; inner array info amount plus options
 foreach($receivedDataJSONdecoded as $key => $value){
 	if ($key!=0) {
@@ -62,7 +39,17 @@ foreach($receivedDataJSONdecoded as $key => $value){
 
 //use wordwrap() if lines are longer than 70 characters
 $emailMsg= wordwrap($emailMsg,70);
-mail("webdev@WebLAMP.WebLAMP.at","DaaSConfig",$emailMsg);
+//hier die To: Emailadresse eintragen
+$emailTo="webdev@WebLAMP.WebLAMP.at";
+// oder auch das selbe Email an den Kunden
+//$emailTo="webdev@WebLAMP.WebLAMP.at".$receivedDataJSONdecoded[0]['Email'];
+$success=mail($emailTo,"DaaSConfig",$emailMsg);
 
-//echo json_encode($msg);
+var_error_log($success);
+
+$returnMsg ="";
+if ($success) {$returnMsg = "Vielen Dank!\nIhre Nachricht wurde erfolgreich an uns uebermittelt.\nWir werden Sie in Kuerze kontaktieren";}
+else {$returnMsg = "Es ist leider ein Problem bei der Uebertragung aufgetreten.\nBitte kontaktieren Sie uns direkt oder versuchen Sie es später nochmals";}
+
+echo json_encode($returnMsg);
 ?>

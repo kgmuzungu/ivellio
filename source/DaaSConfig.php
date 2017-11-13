@@ -58,6 +58,7 @@
 		text-decoration: none;
 		}
 	.textAngebot {padding:1rem 1rem 1rem 1rem;}
+	.card-img-top {width: 6cm;}
 	.btn{margin-bottom:10px;}
 	.bg-primary{background-color:#3e9bff;}
 	.bg-success{background-color:#3bd75e;}
@@ -212,7 +213,7 @@
       <div class="form-group row">
         <label class="col-sm-2 col-form-label" style="text-align:right;">Telefon</label>
         <div class="col-sm-5">
-          <input id="telefone" class="form-control" type="text" pattern="^[0][0-9]{8,14}$" maxlength="14" placeholder="0123456789 keine Sonderzeichen wie + oder / oder -" name="Telefon">
+          <input id="telefone" class="form-control" type="text" pattern="^[0+][0-9]{8,14}$" maxlength="14" placeholder="Telefonnummer" name="Telefon">
         </div>
         <div class="col-sm-5 messages"></div>
       </div>
@@ -229,7 +230,8 @@
       <div class="form-group row">
       <div class="col-sm-2"></div>
         <div class="col-sm-5">
-          <button type="button" class="btn btn-outline-secondary" id="submitDaaS">Versenden</button>
+           <!-- <input type="submit" value="versenden" class="btn btn-outline-secondary" id="submitDaaS"> -->
+           <button type="button" class="btn btn-outline-secondary" id="submitDaaS">Versenden</button> 
         </div>
       </div>
 				
@@ -392,14 +394,25 @@
 		//catch submit button
 		$("#submitDaaS").on('click', function(event){
 			event.stopPropagation();
-			console.log("in function submitDaaS\n");
+			//console.log("in function submitDaaS\n");
 			var formResult = $('#main_form').serializeArray();
-			var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
-			console.log(formResult);
-
+			//var formResultJSON = JSON.parse(JSON.stringify(jQuery('#main_form').serializeArray()));
+			//console.log(formResult);	
+			//check if form was filled in or not
+			//the following line is unfortunatly not working in IE
+			//formResult.find(o => o.name === 'Nachname').value == ''
+			let emailAdr = formResult.filter(function(value){ return value.name=="Email";})[0].value;
+			let nachName = formResult.filter(function(value){ return value.name=="Nachname";})[0].value;
+			//alert(emailAdr[0]["value"]);
+			//alert(emailAdr[0].value);
+			//let emailAdr = formResult.find(o => o.name === 'Email').value;
+			if ((emailAdr == '')||(nachName == '')){
+				alert("Damit wir Sie auch beraten koennen, bitten wir Sie zumindest Ihre Emailadresse und Nachnamen anzugeben");}
+			else if (!checkEmailValid(emailAdr)){alert("Bitte geben Sie eine gueltige Emailadresse ein");}
+				else{
 			var ret=createEmailData(formResult);
 			var retJSON=JSON.stringify(ret);
-			console.log(retJSON);			
+			//console.log(retJSON);			
 			//using jQuery ajax
 			$.ajax({ 
 	          	method: "POST", 
@@ -410,34 +423,43 @@
 	          	//contentType: "application/json; charset=utf-8",
 	         })
 	        .done(function( returnData ) { 
-		        alert("back from sending client data\n" + returnData);
+		        alert(returnData);
 				//done function :display bootstrap modular on success and give option to go to home page or back to DaaS
 		    });
+			} //end else 
 		});
 
-
+		function checkEmailValid(emailAdr){
+			var email_regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,3})+$/;
+			if (email_regex.test(emailAdr)){return true;}
+			return false;	
+		}
 		function createEmailData (serializedForm){
 			var mailMsg=[]; //array
 			var arrCount=0; //for looping through the form array
 			
 			//get client data
 			let mailObj={}; //empty object
-			mailObj.Email=serializedForm.find(o => o.name === 'Email').value;
-			mailObj.Vorname=serializedForm.find(o => o.name === 'Vorname').value;
-			mailObj.Nachname=serializedForm.find(o => o.name === 'Nachname').value;
-			mailObj.Firma=serializedForm.find(o => o.name === 'Firma').value;
-			mailObj.Telefon=serializedForm.find(o => o.name === 'Telefon').value;
-			mailObj.Kommentar=serializedForm.find(o => o.name === 'Kommentar').value;
+			//emailAdr = formResult.filter(function(value){ return value.name=="Email";})[0].value;
+			//mailObj.Email=serializedForm.find(o => o.name === 'Email').value;
+			mailObj.Email=serializedForm.filter(function(value){ return value.name=="Email";})[0].value;
+			mailObj.Vorname=serializedForm.filter(function(value){ return value.name=="Vorname";})[0].value;
+			mailObj.Nachname=serializedForm.filter(function(value){ return value.name=="Nachname";})[0].value;
+			mailObj.Firma=serializedForm.filter(function(value){ return value.name=="Firma";})[0].value;
+			mailObj.Telefon=serializedForm.filter(function(value){ return value.name=="Telefon";})[0].value;
+			mailObj.Kommentar=serializedForm.filter(function(value){ return value.name=="Kommentar";})[0].value;
 			mailMsg[0]=mailObj;
 			
 			//get order data from website
 			//console.log("output 1st array element "+serializedForm[0].name);
-			if (serializedForm.find(o => o.name === 'dev_amount1').value=='0') {console.log("dev_amount1 is 0");} 
+			//if (serializedForm.find(o => o.name === 'dev_amount1').value=='0') {console.log("dev_amount1 is 0");} 
+			if (serializedForm.filter(function(value){ return value.name=="dev_amount1";})[0].value=='0') {console.log("dev_amount1 is 0");} 
 			else {
 				let mailObj={}; //empty object
 				arrCount=1; //because dev_amount1 is at index=0
 				mailObj.Kategorie=$("#card1arbeitsplatz").text();
-				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount1').value;
+				//mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount1').value;
+				mailObj.Anzahl=serializedForm.filter(function(value){ return value.name=="dev_amount1";})[0].value;
 				mailObj.Produkt=$("#card1device span").text();
 				mailObj.Preis=$("#card1preis .row .my-auto").text();
 
@@ -452,11 +474,11 @@
 				mailMsg[1]=mailObj;
 				console.log("dev_amount1 is NOT 0 ");
 			}
-			if (serializedForm.find(o => o.name === 'dev_amount2').value=='0'){console.log("dev_amount2 is 0");} 
+			if (serializedForm.filter(function(value){ return value.name=="dev_amount2";})[0].value=='0'){console.log("dev_amount2 is 0");} 
 			else {
 				let mailObj={}; //empty object
 				mailObj.Kategorie=$("#card2arbeitsplatz").text();
-				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount2').value;
+				mailObj.Anzahl=serializedForm.filter(function(value){ return value.name=="dev_amount2";})[0].value;
 				mailObj.Produkt=$("#card2device span").text();
 				mailObj.Preis=$("#card2preis .row .my-auto").text();
 				arrCount++; //because jump over dev_amount2 field
@@ -471,11 +493,11 @@
 				mailMsg[2]=mailObj;
 				console.log("dev_amount2 is NOT 0 ");
 			}
-			if (serializedForm.find(o => o.name === 'dev_amount3').value=='0'){console.log("dev_amount3 is 0");} 
+			if (serializedForm.filter(function(value){ return value.name=="dev_amount3";})[0].value=='0'){console.log("dev_amount3 is 0");} 
 			else {
 				let mailObj={}; //empty object
 				mailObj.Kategorie=$("#card3arbeitsplatz").text();
-				mailObj.Anzahl=serializedForm.find(o => o.name === 'dev_amount3').value;
+				mailObj.Anzahl=serializedForm.filter(function(value){ return value.name=="dev_amount3";})[0].value;
 				mailObj.Produkt=$("#card3device span").text();
 				mailObj.Preis=$("#card3preis .row .my-auto").text();
 				arrCount++; //because jump over dev_amount2 field
